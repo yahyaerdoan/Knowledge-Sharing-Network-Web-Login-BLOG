@@ -1,7 +1,10 @@
-﻿namespace EntityLayer.Concrete
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EntityLayer.Concrete
 {
     public class Writer
     {
+        [Key]
         public int WriterId { get; set; }
         public string WriterName { get; set; }
         public string WriterAbout { get; set; }
