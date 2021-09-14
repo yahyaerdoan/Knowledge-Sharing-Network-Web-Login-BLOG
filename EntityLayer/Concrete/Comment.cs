@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EntityLayer.Concrete
@@ -12,5 +13,7 @@ namespace EntityLayer.Concrete
         public string CommentContent { get; set; }
         public DateTime CommentDate { get; set; }
         public bool CommentStatus { get; set; }
+        public int BlogId { get; set; }
+        public Blog Blogs { get; set; }
     }
 }
