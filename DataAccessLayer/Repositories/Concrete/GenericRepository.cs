@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Repository
+namespace DataAccessLayer.Repositories
 {
-    public class GenericRepository<T> : IGenericDaL<T> where T : class
+    public class GenericRepository<T> : IGenericDal<T> where T : class
 
     {
         public void Add(T t)
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repository
             c.SaveChanges();
         }
 
-        public List<T> GetAll(T t)
+        public List<T> GetAll()
         {
             using var c = new WebLogContext();
             return c.Set<T>().ToList();
