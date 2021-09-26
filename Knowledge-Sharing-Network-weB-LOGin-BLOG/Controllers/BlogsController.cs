@@ -13,7 +13,12 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         BlogManager blogManager = new BlogManager(new EfBlogDal());
         public IActionResult Index()
         {
-            var values = blogManager.GetAll();
+            var values = blogManager.GetAllWithCategory();
+            return View(values);
+        }
+        public IActionResult BlogReadAll(int id)
+        {
+            var values = blogManager.GetListBlogById(id);
             return View(values);
         }
     }

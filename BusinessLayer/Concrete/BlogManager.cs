@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public void Delete(Blog blog)
         {
-            throw new System.NotImplementedException();
+            _blogDal.Delete(blog);
         }
 
         public List<Blog> GetAll()
@@ -28,14 +28,24 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetAll();
         }
 
+        public List<Blog> GetAllWithCategory()
+        {
+            return _blogDal.GetAllWithCategory();
+        }
+
         public Blog GetById(int id)
         {
-            throw new System.NotImplementedException();
+            return _blogDal.GetById(id);
+        }
+
+        public List<Blog> GetListBlogById(int id)
+        {
+            return _blogDal.ListAll(x => x.BlogId == id);
         }
 
         public void Update(Blog blog)
         {
-            throw new System.NotImplementedException();
+            _blogDal.Update(blog);
         }
     }
 }
