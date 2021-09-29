@@ -18,6 +18,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         }
         public IActionResult BlogReadAll(int id)
         {
+            ViewBag.i = id;
             var values = blogManager.GetListBlogById(id);
             return View(values);
         }
