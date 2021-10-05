@@ -3,7 +3,9 @@ using BusinessLayer.ValidationRules.FluentValidation;
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Knowledge_Sharing_Network_weB_LOGin_BLOG.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +16,56 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
     public class RegisterController : Controller
     {
         WriterManager writerManager = new WriterManager(new EfWriterDal());
+
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.Cities = GetCityList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(Writer writer)
+        public IActionResult Index(Writer writer, string PasswordControl, string cityViewModel)
         {
             WriterValidator validationRules = new WriterValidator();
             ValidationResult results = validationRules.Validate(writer);
-            if (results.IsValid)
+            if (results.IsValid && writer.WriterPassword == PasswordControl)
             {
                 writer.WriterStatus = true;
                 writer.WriterAbout = "Deneme Test";
                 writerManager.Add(writer);
-                return RedirectToAction("Index", "Blog");
+                return RedirectToAction("Index", "Blogs");
             }
-            else
+            else if (!results.IsValid)
             {
                 foreach (var item in results.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
+            else
+            {
+                ModelState.AddModelError("WriterPassword", "Girmiş olduğunuz şifreniz uyuşmamaktadır, yeniden deneyin!");
+            }
+
             return View();
+        }
+
+        public List<SelectListItem> GetCityList()
+        {
+            List<SelectListItem> cities = (from x in GetCities()
+                                           select new SelectListItem
+                                           {
+                                               Text = x,
+                                               Value = x
+                                           }).ToList();
+            return cities;
+        }
+
+        public List<string> GetCities()
+        {
+            String[] Cities = new String[] { "Adana", "Adıyaman", "Afyon", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", "Aydın", "Bartın", "Batman", "Balıkesir", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Düzce", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Iğdır", "Isparta", "İçel", "İstanbul", "İzmir", "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kırıkkale", "Kırklareli", "Kırşehir", "Kilis", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Şırnak", "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak" };
+            return new List<string>(Cities);
         }
     }
 }
