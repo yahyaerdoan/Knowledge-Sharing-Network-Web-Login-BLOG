@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using EntityLayer.Concrete;
+using System.Collections.Generic;
 
 namespace BusinessLayer.Concrete
 {
@@ -9,6 +11,11 @@ namespace BusinessLayer.Concrete
         public AboutManager(IAboutDal aboutDal)
         {
             _aboutDal = aboutDal;
+        }
+
+        public List<About> GetAll()
+        {
+           return _aboutDal.GetAll();
         }
     }
 }

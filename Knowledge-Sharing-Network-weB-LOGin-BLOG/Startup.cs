@@ -39,6 +39,9 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/ErrorPages/ErrorNotFoundPage","?code={0}"); // TODO : Kendi 404 sayfamýzý oluþturmak için konfigürasyon metodu
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,21 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         {
             return View();
         }
-        public PartialViewResult PartialAddComment()
+
+        [HttpGet]
+        public IActionResult PartialAddComment()
         {
-            return PartialView();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult PartialAddComment(Comment comment)
+        {
+            comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            comment.CommentStatus = true;
+            comment.BlogId = 18;
+            commentManager.Add(comment);
+            return RedirectToAction("BlogReadAll", "Blogs", new { id = comment.BlogId });
         }
         public PartialViewResult PartialCommentListByBlog(int id)
         {

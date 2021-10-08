@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
@@ -9,6 +10,11 @@ namespace BusinessLayer.Concrete
         public ContactManager(IContactDal contactDal)
         {
             _contactDal = contactDal;
+        }
+
+        public void Add(Contact contact)
+        {
+            _contactDal.Add(contact);
         }
     }
 }
