@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +25,15 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); //TODO : Service Mvc metodu sayesinde Global yetkilendirme servisi oluþturuldu. 
+
+            services.AddSession(); //TODO : Oturum ekleme Login Controllerde yaptýðýmýz AllowAnonymous yetkinliðini doðru kullanmak için
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,10 +50,12 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/ErrorPages/ErrorNotFoundPage","?code={0}"); // TODO : Kendi 404 sayfamýzý oluþturmak için konfigürasyon metodu
+            app.UseStatusCodePagesWithReExecute("/ErrorPages/ErrorNotFoundPage", "?code={0}"); // TODO : Kendi 404 sayfamýzý oluþturmak için konfigürasyon metodu
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession(); //TODO : Authorize metodunun çalýþmasý izin verilen sýnýflarýn açýlmasý için bu metodu kullan demeliyiz.
 
             app.UseRouting();
 
