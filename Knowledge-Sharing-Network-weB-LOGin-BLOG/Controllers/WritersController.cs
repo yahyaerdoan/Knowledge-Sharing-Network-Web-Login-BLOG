@@ -9,7 +9,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 {
     public class WritersController : Controller
     {
-        [AllowAnonymous]
+       //TODO : [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -19,6 +19,11 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
             return View();
         }
         public IActionResult WriterMail()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Deneme()
         {
             return View();
         }

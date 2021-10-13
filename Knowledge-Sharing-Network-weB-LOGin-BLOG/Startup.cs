@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
 {
@@ -27,13 +28,20 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
         {
             services.AddControllersWithViews(); //TODO : Service Mvc metodu sayesinde Global yetkilendirme servisi oluþturuldu. 
 
-            services.AddSession(); //TODO : Oturum ekleme Login Controllerde yaptýðýmýz AllowAnonymous yetkinliðini doðru kullanmak için
+           //TODO :  services.AddSession(); //TODO : Oturum ekleme Login Controllerde yaptýðýmýz AllowAnonymous yetkinliðini doðru kullanmak için
 
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            services.AddMvc(); //TODO : Return url metodu. Sayfada eriþime izin verilmeyen alana týklandýðýnda login sayfasýna default yönlendirme yapmak için aþaðýdaki bloklarý da yazdýk.
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+                {
+                    x.LoginPath = "/Login/Index";
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +63,9 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSession(); //TODO : Authorize metodunun çalýþmasý izin verilen sýnýflarýn açýlmasý için bu metodu kullan demeliyiz.
+           //TODO app.UseSession(); //TODO : Authorize metodunun çalýþmasý izin verilen sýnýflarýn açýlmasý için bu metodu kullan demeliyiz.
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

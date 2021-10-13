@@ -2,6 +2,7 @@
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer.Concrete
 {
@@ -26,6 +27,10 @@ namespace BusinessLayer.Concrete
         public List<Blog> GetAll()
         {
             return _blogDal.GetAll();
+        }
+        public List<Blog> GetLastThreeBlogs()
+        {
+            return _blogDal.GetAll().Take(3).ToList();
         }
 
         public List<Blog> GetAllWithCategory()

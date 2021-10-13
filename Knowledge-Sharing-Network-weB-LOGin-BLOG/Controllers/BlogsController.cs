@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 {
+    [AllowAnonymous]
     public class BlogsController : Controller
     {
         BlogManager blogManager = new BlogManager(new EfBlogDal());
