@@ -1,17 +1,10 @@
 ﻿using EntityLayer.Concrete;
 using System.Collections.Generic;
+using BusinessLayer.Repositories.Abstract;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IWriterService
+    public interface IWriterService : IGenericService<Writer>
     {
-        void Add(Writer writer);
-
-        //void Delete(Writer writer);
-        //void Update(Writer writer);
-        //Writer GetById(int id);
-        //List<Writer> GetAll();
-        //List<Writer> GetAllWithCategory();
-        //List<Writer> GetListBlogById(int id);
     }
 }

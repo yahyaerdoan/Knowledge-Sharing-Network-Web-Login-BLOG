@@ -1,13 +1,12 @@
-﻿using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete.Context;
+using DataAccessLayer.Repositories.Abstract;
 
-namespace DataAccessLayer.Repositories
+namespace DataAccessLayer.Repositories.Concrete
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
 

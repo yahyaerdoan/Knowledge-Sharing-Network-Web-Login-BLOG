@@ -1,9 +1,9 @@
-﻿using EntityLayer.Concrete;
+﻿using BusinessLayer.Repositories.Abstract;
+using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IContactService
+    public interface IContactService : IGenericService<Contact>
     {
-        void Add(Contact contact);
     }
 }

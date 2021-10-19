@@ -1,14 +1,16 @@
-﻿using BusinessLayer.Abstract;
+﻿using System;
+using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BusinessLayer.Concrete
 {
     public class BlogManager : IBlogService
     {
-        IBlogDal _blogDal;
+        readonly IBlogDal _blogDal;
         public BlogManager(IBlogDal blogDal)
         {
             _blogDal = blogDal;
@@ -28,6 +30,12 @@ namespace BusinessLayer.Concrete
         {
             return _blogDal.GetAll();
         }
+
+        public List<Blog> ListAll(Expression<Func<Blog, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Blog> GetLastThreeBlogs()
         {
             return _blogDal.GetAll().Take(3).ToList();

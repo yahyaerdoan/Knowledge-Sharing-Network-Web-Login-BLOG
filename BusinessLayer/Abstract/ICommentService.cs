@@ -1,15 +1,12 @@
 ﻿using EntityLayer.Concrete;
 using System.Collections.Generic;
+using BusinessLayer.Repositories.Abstract;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ICommentService
+    public interface ICommentService : IGenericService<Comment>
     {
-        void Add(Comment comment);
-        void Delete(Comment comment);
-        void Update(Comment comment);
-        Comment GetById(int id);
-        List<Comment> GetAll();
+       
 
         //List<Comment> GetAllWithCategory();
         List<Comment> GetListCommentById(int id);

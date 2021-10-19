@@ -4,15 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Repositories.Abstract;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ICategoryService
+    public  interface ICategoryService : IGenericService<Category>
     {
-        void Add(Category category);
-        void Delete(Category category);
-        void Update(Category category);
-        Category GetById(int id);
-        List<Category> GetAll();
     }
 }

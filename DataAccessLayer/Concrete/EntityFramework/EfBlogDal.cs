@@ -5,6 +5,7 @@ using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using DataAccessLayer.Repositories.Concrete;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {

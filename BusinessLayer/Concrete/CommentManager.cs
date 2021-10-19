@@ -1,13 +1,15 @@
-﻿using BusinessLayer.Abstract;
+﻿using System;
+using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace BusinessLayer.Concrete
 {
     public class CommentManager : ICommentService
     {
-        ICommentDal _commentDal;
+        readonly ICommentDal _commentDal;
         public CommentManager(ICommentDal commentDal)
         {
             _commentDal = commentDal;
@@ -26,6 +28,11 @@ namespace BusinessLayer.Concrete
         public List<Comment> GetAll()
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<Comment> ListAll(Expression<Func<Comment, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public Comment GetById(int id)
