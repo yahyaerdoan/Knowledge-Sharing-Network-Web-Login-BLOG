@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <h6><label for="exampleInputPassword2 mb-2">Kategori</label></h6>
-                            @Html.DropDownListFor(x => x.Category.CategoryId, (List<SelectListItem>)ViewBag.categoryvalues, new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.categoryvalues, new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-12">

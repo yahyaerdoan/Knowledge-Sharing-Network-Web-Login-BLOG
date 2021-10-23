@@ -37,16 +37,17 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            List<SelectListItem> selectListItems = (from x in categoryManager.GetAll()
-                                                   select new SelectListItem
-                                                   {
-                                                       Text = x.CategoryName,
-                                                       Value = x.CategoryId.ToString()
-                                                   })
+            //CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            //List<SelectListItem> selectListItems = (from x in categoryManager.GetAll()
+            //                                        select new SelectListItem
+            //                                        {
+            //                                            Text = x.CategoryName,
+            //                                            Value = x.CategoryId.ToString()
+            //                                        })
 
-                                                   .ToList();
-            ViewBag.categoryvalues = selectListItems;
+            //                                       .ToList();
+            //ViewBag.categoryvalues = selectListItems;
+            ViewBag.categoryvalues = Category();
             return View();
         }
         [HttpPost]
@@ -68,8 +69,23 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
+                ViewBag.categoryvalues = Category();
             }
-            return View();
+            return View(blog);
+        }
+
+        public List<SelectListItem> Category()
+        {
+            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            List<SelectListItem> selectListItems = (from x in categoryManager.GetAll()
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = x.CategoryName,
+                                                        Value = x.CategoryId.ToString()
+                                                    })
+
+                .ToList();
+            return selectListItems;
         }
     }
 }
