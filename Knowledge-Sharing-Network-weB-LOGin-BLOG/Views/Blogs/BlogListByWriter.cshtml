@@ -10,8 +10,9 @@
     <tr>
         <th>#</th>
         <th>Blog Başlığı</th>
-        <th>Oluşturma Tarihi</th>
+        <th>Blog İçeriği</th>
         <th>Kategori</th>
+        <th>Oluşturma Tarihi</th>
         <th>Durum</th>
         <th>Sil</th>
         <th>Güncelle</th>
@@ -21,13 +22,25 @@
         <tr>
             <th>@item.BlogId</th>
             <td>@item.BlogTitle</td>
-            <td>@(((DateTime)item.BlogCreateDate).ToString("dd MMM, yyyy"))</td>
+            <td>
+                @item.BlogContent.Substring(0, item.BlogContent.Substring(0, 20).LastIndexOf(" "))...
+            </td>
+
             <td>@item.Category.CategoryName</td>
-            <td>@item.BlogStatus</td>
+            <td>@(((DateTime)item.BlogCreateDate).ToString("dd MMM, yyyy"))</td>
+            <td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-gradient-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-gradient-info">Pasif</span>
+                }
+            </td>
             <td><a href="#" class="btn btn-danger">Sil</a></td>
             <td><a href="#" class="btn btn-info">Güncelle</a></td>
         </tr>
     }
-
 </table>
 <a href="Add" class="btn btn-primary">Yeni Yazı Ekle</a>
