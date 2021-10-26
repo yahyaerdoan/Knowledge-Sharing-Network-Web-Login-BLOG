@@ -23,7 +23,7 @@
             <th>@item.BlogId</th>
             <td>@item.BlogTitle</td>
             <td>
-                @item.BlogContent.Substring(0, item.BlogContent.Substring(0, 20).LastIndexOf(" "))...
+              @item.BlogContent.Substring(0, item.BlogContent.Substring(0, 20).LastIndexOf(" ", StringComparison.Ordinal))...
             </td>
 
             <td>@item.Category.CategoryName</td>
@@ -38,9 +38,9 @@
                     <span class="badge badge-gradient-info">Pasif</span>
                 }
             </td>
-            <td><a href="#" class="btn btn-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-info">Güncelle</a></td>
+            <td><a href="/Blogs/Delete/@item.BlogId" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Blogs/Update/@item.BlogId" class="btn btn-info">Güncelle</a></td>
         </tr>
     }
 </table>
-<a href="Add" class="btn btn-primary">Yeni Yazı Ekle</a>
+<a href="/Blogs/Add/" class="btn btn-primary">Yeni Yazı Ekle</a>

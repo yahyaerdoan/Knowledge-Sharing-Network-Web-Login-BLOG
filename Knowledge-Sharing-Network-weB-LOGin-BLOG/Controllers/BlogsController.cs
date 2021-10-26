@@ -73,6 +73,28 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
             }
             return View(blog);
         }
+        public IActionResult Delete(int id)
+        {
+            var value = blogManager.GetById(id);
+            blogManager.Delete(value);
+            return RedirectToAction("BlogListByWriter");
+        }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var value = blogManager.GetById(id);
+            ViewBag.categoryvalues = Category();
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult Update(Blog blog)
+        {
+            blog.WriterId = 1;
+            blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            //TODO : Ödev : Güncelleme tarihinin yayınlama tarihi olarak kalması sağlanacak
+            blogManager.Update(blog);
+            return RedirectToAction("BlogListByWriter");
+        }
 
         public List<SelectListItem> Category()
         {
@@ -83,7 +105,6 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
                                                         Text = x.CategoryName,
                                                         Value = x.CategoryId.ToString()
                                                     })
-
                 .ToList();
             return selectListItems;
         }
