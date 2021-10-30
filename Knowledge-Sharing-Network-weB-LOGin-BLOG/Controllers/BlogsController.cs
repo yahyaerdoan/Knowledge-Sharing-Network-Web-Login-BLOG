@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BusinessLayer.ValidationRules.FluentValidation;
 using EntityLayer.Concrete;
@@ -32,6 +33,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         public IActionResult BlogListByWriter()
         {
             var values = blogManager.GetAllWithCategoryByWriterId(1);
+            Thread.Sleep(10000);
             return View(values);
         }
         [HttpGet]
@@ -89,13 +91,28 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         [HttpPost]
         public IActionResult Update(Blog blog)
         {
-            blog.WriterId = 1;
-            blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            //TODO : Ödev : Güncelleme tarihinin yayınlama tarihi olarak kalması sağlanacak
-            blogManager.Update(blog);
-            return RedirectToAction("BlogListByWriter");
+            BlogValidator validationRules = new BlogValidator();
+            ValidationResult results = validationRules.Validate(blog);
+            if (results.IsValid)
+            {
+                var value = blogManager.GetById(blog.BlogId);
+                blog.WriterId = 1;
+                blog.BlogId = value.BlogId;
+                blog.BlogCreateDate = value.BlogCreateDate; //DateTime.Parse(DateTime.Now.ToShortDateString());
+                //TODO : Ödev : Güncelleme tarihinin yayınlama tarihi olarak kalması sağlanacak, yeni bir değişken atama yöntemiyle default değer çağırması yapıldı.
+                blogManager.Update(blog);
+                return RedirectToAction("BlogListByWriter");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                ViewBag.categoryvalues = Category();
+            }
+            return View();
         }
-
         public List<SelectListItem> Category()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());

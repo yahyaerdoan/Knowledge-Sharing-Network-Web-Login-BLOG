@@ -5,22 +5,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Purple Admin</title>
-    <!-- plugins:css -->
     <link rel="stylesheet" href="~/writerTema/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/writerTema/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="~/writerTema/assets/css/style.css">
-    <!-- End layout styles -->
     <link rel="shortcut icon" href="~/writerTema/assets/images/favicon.ico" />
+    <link href="~/writerTema/assets/css/SweetAlert2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 </head>
 <body>
     <div class="container-scroller">
@@ -71,13 +65,13 @@
                         </a>
                     </li>
                     @await Component.InvokeAsync("WriterMessageNotification")
-                <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                        <i class="mdi mdi-bell-outline"></i>
-                        <span class="count-symbol bg-danger"></span>
-                    </a>
-                    @await Component.InvokeAsync("WriterNotification")
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                            <i class="mdi mdi-bell-outline"></i>
+                            <span class="count-symbol bg-danger"></span>
+                        </a>
+                        @await Component.InvokeAsync("WriterNotification")
+                    </li>
                     <li class="nav-item nav-logout d-none d-lg-block">
                         <a class="nav-link" href="#">
                             <i class="mdi mdi-power"></i>
@@ -108,22 +102,11 @@
                 @await Html.PartialAsync("~/Views/Writers/PartialWriterFooter.cshtml")
                 <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
     <script src="~/writerTema/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
     <script src="~/writerTema/assets/js/off-canvas.js"></script>
     <script src="~/writerTema/assets/js/hoverable-collapse.js"></script>
     <script src="~/writerTema/assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <!-- End custom js for this page -->
 </body>
 </html>

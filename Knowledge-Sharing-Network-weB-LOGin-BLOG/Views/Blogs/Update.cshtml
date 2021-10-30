@@ -12,30 +12,36 @@
                 @using (Html.BeginForm("Update", "Blogs", FormMethod.Post))
                 {
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <h6><label for="validationCustom01">Blog Id</label></h6>
-                            @Html.TextBoxFor(x => x.BlogId, new { @class = "form-control" })
-                        </div>
+                        @*<div class="form-group col-md-6">
+                                <h6><label for="validationCustom01">Blog Id</label></h6>
+                                @Html.HiddenFor(x => x.BlogId, new { @class = "form-control" })
+                            </div>*@
+                        @Html.HiddenFor(x => x.BlogId, new { @class = "form-control" })
                         <div class="form-group col-md-6">
                             <h6><label for="validationCustom01">Blog Başlığı</label></h6>
                             @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-6">
                             <h6><label for="exampleInputPassword1 mb-2">Blog Görseli</label></h6>
                             @Html.TextBoxFor(x => x.BlogImage, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BlogImage, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group col-md-6">
                             <h6><label for="exampleInputPassword1 mb-2">Blog Küçük Görsel</label></h6>
                             @Html.TextBoxFor(x => x.BlogThumbnailImage, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BlogThumbnailImage, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-6">
                             <h6><label for="exampleInputPassword2 mb-2">Kategori</label></h6>
                             @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.categoryvalues, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-12">
                             <h6><label for="exampleInputImage mb-2">Blog İçeriği</label></h6>
                             @Html.TextAreaFor(x => x.BlogContent, 15, 3, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary submit mb-4">Güncelle, Düzenlensin!</button>
