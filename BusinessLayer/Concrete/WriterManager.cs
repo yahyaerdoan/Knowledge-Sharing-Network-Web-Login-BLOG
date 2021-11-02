@@ -22,27 +22,32 @@ namespace BusinessLayer.Concrete
 
         public void Delete(Writer writer)
         {
-            throw new System.NotImplementedException();
+            _writerDal.Delete(writer);
         }
 
         public void Update(Writer writer)
         {
-            throw new System.NotImplementedException();
+            _writerDal.Update(writer);
         }
 
         public Writer GetById(int id)
         {
-            throw new System.NotImplementedException();
+            return _writerDal.GetById(id);
         }
 
         public List<Writer> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _writerDal.GetAll();
         }
 
         public List<Writer> ListAll(Expression<Func<Writer, bool>> filter)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Writer> GetWriterById(int id)
+        {
+            return _writerDal.ListAll(x=> x.WriterId == id);
         }
     }
 }

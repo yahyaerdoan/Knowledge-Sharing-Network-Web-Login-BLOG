@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.ViewComponents.Writer
 {
-    public class WriterMessageNotification : ViewComponent
+    public class PartialWriterNotification : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
