@@ -14,7 +14,8 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.ViewComponents.Blog
 
         public IViewComponentResult Invoke()
         {
-            var values = blogManager.GetAllWithCategory();
+            var values = blogManager.GetAllWithCategory().OrderByDescending(x=>x.BlogId).Take(10).ToList();
+                //.OrderByDescending(x=> x.BlogCreateDate).Take(10).ToString();
             return View(values);
         }
     }

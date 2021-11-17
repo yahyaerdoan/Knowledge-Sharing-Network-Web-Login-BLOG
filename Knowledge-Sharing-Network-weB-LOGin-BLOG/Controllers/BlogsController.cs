@@ -32,8 +32,8 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var values = blogManager.GetAllWithCategoryByWriterId(1);
-            Thread.Sleep(10000);
+            var values = blogManager.GetAllWithCategoryByWriterId(2);
+            Thread.Sleep(50000);
             return View(values);
         }
         [HttpGet]

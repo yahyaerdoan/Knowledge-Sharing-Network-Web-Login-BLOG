@@ -42,7 +42,7 @@ namespace BusinessLayer.Concrete
 
         public List<Writer> ListAll(Expression<Func<Writer, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _writerDal.ListAll(filter);
         }
 
         public List<Writer> GetWriterById(int id)

@@ -1,0 +1,60 @@
+﻿@model EntityLayer.Concrete.Writer
+@{
+    ViewData["Title"] = "UpdateProfile";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+@using (Html.BeginForm("UpdateProfile", "Writers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Profil Bilgilerimi Düzenle</h4>
+                <p class="card-description"> Profil Bilgilerim </p>
+                <form class="form-group">
+                    <div class="form-group">
+                        <label for="">Adınız Soyadınız</label>
+                        @Html.HiddenFor(x => x.WriterId, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">e-Mail Adresiniz</label>
+                        @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.WriterMail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="">Yeni Şifrem</label>
+                        @Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control", type = "Password", name = "Password", id = "password", placeholder = "yeni şifrem", required = "" })
+                        @Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="">Şifre Tekrarım</label>
+                        @Html.Password("PasswordControl", "", new { @class = "form-control", @type = "password", id = "password-again", name = "PasswordControl", placeholder = "yeni şifre kontrolüm", required = "" })
+                        @Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectGender">Cinsiyetim</label>
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Erkek</option>
+                            <option>Kadın</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputImage mb-2">Profil Fotoğrafım</label>
+                        <input type="file" class="form-control" id="exampleInputImage" name="imageFile" placeholder="">
+                        @Html.ValidationMessageFor(x => x.WriterImage)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Hakkımda</label>
+                        @Html.TextAreaFor(x => x.WriterAbout, 10, 3, new { @class = "form-control", placeholder = "Hakkımda birşeyler yazmalısın", required = "" })
+                        @Html.ValidationMessageFor(x => x.WriterAbout, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
+                    <button class="btn btn-light">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

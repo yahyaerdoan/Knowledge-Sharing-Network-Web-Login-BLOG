@@ -1,18 +1,17 @@
 ﻿@using EntityLayer.Concrete
 @model List<Blog>
 @{
+    int i = 0;
+}
+@{
     ViewData["Title"] = "BlogListByWriter";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
 <h1>Yazarın Blogları(Sergilenen Gönderilerim)</h1>
 <table class="table table-bordered">
     <tr>
-        <th>#</th>
+        <th></th>
         <th>Blog Başlığı</th>
         <th>Blog İçeriği</th>
         <th>Kategori</th>
@@ -23,74 +22,73 @@
     </tr>
     @foreach (var item in Model)
     {
+        i++;
         <tr>
-            <th>@item.BlogId</th>
+            <th>@i</th>
             <td>@item.BlogTitle</td>
             <td>
-                <a href="/Blogs/BlogListByWriter/@item.BlogId" id="a_@item.BlogId">Ne yazmışım, bi göster!</a>
+                <a href="/Blogs/BlogListByWriter/@item.BlogId" id="detail_@item.BlogId">Ne yazmışım, bi göster!</a>
 
             </td>
 
             <td>@item.Category.CategoryName</td>
             <td>@(((DateTime) item.BlogCreateDate).ToString("dd MMM, yyyy"))</td>
             <td>
-                @if (item.BlogStatus)
-                {
-                    <span class="badge badge-gradient-success">Aktif</span>
-                }
-                else
-                {
-                    <span class="badge badge-gradient-info">Pasif</span>
-                }
+                @*@if (item.BlogStatus)
+                    {*@
+                @Html.Raw(item.BlogStatus == true ? "<span class='badge badge-gradient-success'>Aktif</span>" : "<span class='badge badge-gradient-info'>Pasif</span>")
+                @*<span class="badge badge-gradient-success">Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-gradient-info">Pasif</span>
+                    }*@
             </td>
-            <td><a href="/Blogs/Delete/@item.BlogId" id="Sil_@item.BlogId" class="badge badge-gradient-danger">Sil</a></td>
+            <td><a href="/Blogs/Delete/@item.BlogId" id="delete_@item.BlogId" class="badge badge-gradient-danger">Sil</a></td>
             <td><a href="/Blogs/Update/@item.BlogId" class="badge badge-gradient-info">Güncelle</a></td>
-            <div>
-                <script>
-                $("#a_@item.BlogId").click(function alert() {
-                    Swal.fire({
-                        title: "@item.BlogTitle",
-                        title: "@item.BlogContent",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown',
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    @*Swal.fire({
+        </tr>
+        <script charset="uft-8" type="text/javascript">
+                    $("#delete_@item.BlogId").click(function(e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'UYARI!',
+                            text: "Blog yazısını silmek istediğinize emin misiniz?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            showCancelButton: true,
+                            confirmButtonColor: '#5CBA6C',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Evet',
+                            cancelButtonText: 'Hayır'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    'Silindi!',
+                                    'Seçilen Blog Silindi.',
+                                    'success'
+                                )
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            }
+                        })
+                    });
 
+                    $("#detail_@item.BlogId").click(function alert() {
+                        Swal.fire({
+                            title: "@item.BlogTitle",
+                            text: "@item.BlogContent",
+                            html: '@item.BlogContent',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown',
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        })
+                        @*Swal.fire({
                         text: " @item.BlogContent.Substring(0, item.BlogContent.Substring(0, 75).LastIndexOf(" "))...",
                     })*@
-                });
-                </script>
-            </div>
-            <script>
-                $('#Sil_@item.BlogId').click(function(e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'UYARI!',
-                        text: "Blog yazısını silmek istediğinize emin misiniz?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        showCancelButton: true,
-                        confirmButtonColor: '#5CBA6C',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Evet',
-                        cancelButtonText: 'Hayır'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Silindi!',
-                                'Seçilen Blog Silindi.',
-                                'success'
-                            )
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        }
-                    })
-                });
-            </script>
-        </tr>
+                    });
+        </script>
     }
 </table>
 <a href="/Blogs/Add/" class="btn btn-primary">Yeni Yazı Ekle</a>

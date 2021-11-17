@@ -10,29 +10,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 {
     public class RegisterController : Controller
     {
         WriterManager writerManager = new WriterManager(new EfWriterDal());
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.Cities = GetCityList();
+            GetCityList();
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult Index(Writer writer, string PasswordControl, string cityViewModel)
+        public IActionResult Index(Writer writer, 
+            string PasswordControl, 
+            string cityViewModel, 
+            IFormFile imageFile)
         {
+            AddImage addImage = new AddImage();
             WriterValidator validationRules = new WriterValidator();
             ValidationResult results = validationRules.Validate(writer);
             if (results.IsValid && writer.WriterPassword == PasswordControl)
             {
+                
                 writer.WriterStatus = true;
                 writer.WriterAbout = "Deneme Test";
+                addImage.AddPicture(imageFile, out string fileName);
+                writer.WriterImage = fileName;
                 writerManager.Add(writer);
                 return RedirectToAction("Index", "Blogs");
             }
@@ -48,10 +57,11 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
                 ModelState.AddModelError("WriterPassword", "Girmiş olduğunuz şifreniz uyuşmamaktadır, yeniden deneyin!");
             }
 
+            GetCityList();
             return View();
         }
 
-        public List<SelectListItem> GetCityList()
+        public void GetCityList()
         {
             List<SelectListItem> cities = (from x in GetCities()
                                            select new SelectListItem
@@ -59,7 +69,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
                                                Text = x,
                                                Value = x
                                            }).ToList();
-            return cities;
+            ViewBag.Cities = cities;
         }
 
         public List<string> GetCities()

@@ -12,13 +12,7 @@
                 <i class="mdi mdi-home"></i>
             </span> Gösterge Panelim
         </h3>
-        <nav aria-label="breadcrumb">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                </li>
-            </ul>
-        </nav>
+        
     </div>
     <div class="row">
         <div class="col-md-4 stretch-card grid-margin">
@@ -28,7 +22,8 @@
                     <h4 class="font-weight-normal mb-3">
                         Toplam Blog Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">0</h2>
+                    <h5 class="mb-5">@ViewBag.TotalNumberofBlogs</h5>
+                    <h5 class="mb-3">a</h5>
                     <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
                 </div>
             </div>
@@ -38,9 +33,11 @@
                 <div class="card-body">
                     <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                        Yayınladığım Blog Sayım <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                        Yayınladığım Bloglar <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">0</h2>
+                    <h5 class="mb-3">Toplam : @ViewBag.CountofBlogsIvePosted</h5>
+                    <h5 class="mb-3">Aktif : @ViewBag.CountofTrueBlogsIvePosted</h5>
+                    <h5 class="mb-3">Pasif : @ViewBag.CountofFalseBlogsIvePosted</h5>
                     <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
                 </div>
             </div>
@@ -50,9 +47,10 @@
                 <div class="card-body">
                     <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                        Son 7 Gündeki Blog Sayım <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                        Toplam Kategori <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">0</h2>
+                    <h5 class="mb-5">@ViewBag.TotalNumberofCategories</h5>
+                    <h5 class="mb-3">a</h5>
                     <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
                 </div>
             </div>
