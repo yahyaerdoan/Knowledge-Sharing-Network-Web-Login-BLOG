@@ -3,80 +3,59 @@
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<body>
-    <div class="page-header">
-        <h3 class="page-title">
-            <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-home"></i>
-            </span> Gösterge Panelim
-        </h3>
-        
-    </div>
-    <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                    <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">
-                        Toplam Blog Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                    </h4>
-                    <h5 class="mb-5">@ViewBag.TotalNumberofBlogs</h5>
-                    <h5 class="mb-3">a</h5>
-                    <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                    <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">
-                        Yayınladığım Bloglar <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-                    </h4>
-                    <h5 class="mb-3">Toplam : @ViewBag.CountofBlogsIvePosted</h5>
-                    <h5 class="mb-3">Aktif : @ViewBag.CountofTrueBlogsIvePosted</h5>
-                    <h5 class="mb-3">Pasif : @ViewBag.CountofFalseBlogsIvePosted</h5>
-                    <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-success card-img-holder text-white">
-                <div class="card-body">
-                    <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">
-                        Toplam Kategori <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                    </h4>
-                    <h5 class="mb-5">@ViewBag.TotalNumberofCategories</h5>
-                    <h5 class="mb-3">a</h5>
-                    <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
-                </div>
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-home"></i>
+        </span> Gösterge Panelim
+    </h3>
+</div>
+
+<div class="row">
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+            <div class="card-body">
+                <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">
+                    Toplam Blog Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h4>
+                <h5 class="mb-5">@ViewBag.TotalNumberofBlogs</h5>
+                <h5 class="mb-3">a</h5>
+                <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
             </div>
         </div>
     </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-info card-img-holder text-white">
+            <div class="card-body">
+                <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">
+                    Yayınladığım Bloglar <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                </h4>
+                <h5 class="mb-3">Toplam : @ViewBag.CountofBlogsIvePosted</h5>
+                <h5 class="mb-3">Aktif : @ViewBag.CountofTrueBlogsIvePosted</h5>
+                <h5 class="mb-3">Pasif : @ViewBag.CountofFalseBlogsIvePosted</h5>
+                <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-success card-img-holder text-white">
+            <div class="card-body">
+                <img src="~/writerTema/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">
+                    Toplam Kategori <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                </h4>
+                <h5 class="mb-5">@ViewBag.TotalNumberofCategories</h5>
+                <h5 class="mb-3">a</h5>
+                <h6 class="card-text">Asp.Net Core 5.0 Proje</h6>
+            </div>
+        </div>
+    </div>
+</div>
 
-    @await Component.InvokeAsync("PartialBlogListDashboard")
+@await Component.InvokeAsync("PartialBlogListDashboard")
 
-    @await Component.InvokeAsync("PartialWriterAboutOnDashboard")
+@await Component.InvokeAsync("PartialWriterAboutOnDashboard")
 
-    @await Component.InvokeAsync("PartialCategoryListDashboard")
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="~/writerTema/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="~/writerTema/assets/vendors/chart.js/Chart.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="~/writerTema/assets/js/off-canvas.js"></script>
-    <script src="~/writerTema/assets/js/hoverable-collapse.js"></script>
-    <script src="~/writerTema/assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="~/writerTema/assets/js/dashboard.js"></script>
-    <script src="~/writerTema/assets/js/todolist.js"></script>
-    <!-- End custom js for this page -->
-</body>
-</html>
+@await Component.InvokeAsync("PartialCategoryListDashboard")

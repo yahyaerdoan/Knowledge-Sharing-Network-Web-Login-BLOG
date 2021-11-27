@@ -15,12 +15,12 @@ namespace BusinessLayer.Concrete
             _aboutDal = aboutDal;
         }
 
-        public void Add(About t)
+        public void Add(About about)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Delete(About t)
+        public void Delete(About about)
         {
             throw new System.NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
             throw new System.NotImplementedException();
         }
 
-        public void Update(About t)
+        public void Update(About about)
         {
             throw new System.NotImplementedException();
         }
