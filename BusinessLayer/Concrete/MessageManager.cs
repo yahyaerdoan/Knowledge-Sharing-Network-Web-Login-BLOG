@@ -51,7 +51,7 @@ namespace BusinessLayer.Concrete
 
         public List<Message> GetInBoxMessageListByWriterId(int id)
         {
-            return _messageDal.ListAll(x => x.MessageReceiverId == id);
+            return _messageDal.GetAllWithMessageByWriterId(id);
         }
     }
 }
