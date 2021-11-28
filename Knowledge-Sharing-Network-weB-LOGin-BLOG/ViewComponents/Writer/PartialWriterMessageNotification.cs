@@ -13,8 +13,8 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.ViewComponents.Writer
         readonly MessageManager messageManager = new MessageManager(new EfMessageDal());
         public IViewComponentResult Invoke()
         {
-            var messageReceiver = "deneme@gmail.com";
-            var values = messageManager.GetInBoxMessageListByWriterId(messageReceiver);
+            int id = 1;
+            var values = messageManager.GetInBoxMessageListByWriterId(1);
             return View(values);
         }
     }

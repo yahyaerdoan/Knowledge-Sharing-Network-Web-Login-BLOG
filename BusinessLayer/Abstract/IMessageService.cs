@@ -6,6 +6,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IMessageService : IGenericService<Message>
     {
-        List<Message> GetInBoxMessageListByWriterId(string messageReceiver);
+        List<Message> GetInBoxMessageListByWriterId(int id);
     }
 }

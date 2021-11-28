@@ -9,6 +9,22 @@ namespace DataAccessLayer.Concrete.Context
         {
             dbContextOptionsBuilder.UseSqlServer("server=YAHYAERDOGAN\\SQLEXPRESS;database=WebLogDatabase; integrated security=true;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Message>()
+                .HasOne(x => x.MessageOfSender)
+                .WithMany(y => y.MessageSender)
+                .HasForeignKey(z => z.MessageSenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+            
+            modelBuilder.Entity<Message>()
+                .HasOne(x => x.MessagesOfReceiver)
+                .WithMany(y => y.MessageReceiver)
+                .HasForeignKey(z => z.MessageReceiverId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        }
+
         public DbSet<About> Abouts { get; set; }
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Blog> Blogs { get; set; }
