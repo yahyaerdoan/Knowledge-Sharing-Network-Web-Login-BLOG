@@ -13,8 +13,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
     public class DashboardController : Controller
     {
         BlogManager blogManager = new BlogManager(new EfBlogDal());
-
-        [AllowAnonymous]
+        
         public IActionResult Index()
         {
             WebLogContext webLogContext = new WebLogContext();

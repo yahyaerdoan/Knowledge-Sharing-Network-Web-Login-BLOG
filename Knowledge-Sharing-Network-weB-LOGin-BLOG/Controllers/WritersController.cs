@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules.FluentValidation;
+using DataAccessLayer.Concrete.Context;
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
 using Knowledge_Sharing_Network_weB_LOGin_BLOG.Models;
@@ -18,9 +19,19 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
     public class WritersController : Controller
     {
         WriterManager writerManager = new WriterManager(new EfWriterDal());
-        //TODO : [AllowAnonymous]
+        WebLogContext webLogContext = new WebLogContext();
+        [Authorize]
         public IActionResult Index()
         {
+            var writerMail = User.Identity.Name;
+            ViewBag.writerMail = writerMail;
+
+            
+            var WriterName = webLogContext.Writers
+                .Where(x => x.WriterMail == writerMail)
+                .Select(y => y.WriterName)
+                .FirstOrDefault();
+            ViewBag.writerName = WriterName;
             return View();
         }
         public IActionResult WriterProfile()
@@ -46,15 +57,18 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         {
             return PartialView();
         }
-        [AllowAnonymous]
-        [HttpGet]
+       [HttpGet]
         public IActionResult UpdateProfile()
         {
-            var values = writerManager.GetById(1);
+            var writerMail = User.Identity.Name;
+            var writerId = webLogContext.Writers
+                .Where(x => x.WriterMail == writerMail)
+                .Select(y => y.WriterId)
+                .FirstOrDefault();
+            var values = writerManager.GetById(writerId);
             return View(values);
         }
-        [AllowAnonymous]
-        [HttpPost]
+       [HttpPost]
         public IActionResult UpdateProfile(Writer writer, 
             string PasswordControl,
             IFormFile imageFile)

@@ -36,7 +36,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
 
-                return RedirectToAction("Index", "Writers");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

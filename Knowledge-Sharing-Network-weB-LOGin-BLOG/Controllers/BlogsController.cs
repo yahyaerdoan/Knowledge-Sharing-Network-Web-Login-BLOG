@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BusinessLayer.ValidationRules.FluentValidation;
+using DataAccessLayer.Concrete.Context;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 {
-    [AllowAnonymous]
     public class BlogsController : Controller
     {
         BlogManager blogManager = new BlogManager(new EfBlogDal());
+        WebLogContext webLogContext = new WebLogContext();
+        BlogValidator validationRules = new BlogValidator();
         public IActionResult Index()
         {
             var values = blogManager.GetAllWithCategory();
@@ -32,36 +34,35 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var values = blogManager.GetAllWithCategoryByWriterId(2);
+            var writerMail = User.Identity.Name;
+            var writerId = webLogContext.Writers
+                .Where(x => x.WriterMail == writerMail)
+                .Select(y => y.WriterId)
+                .FirstOrDefault();
+            var values = blogManager.GetAllWithCategoryByWriterId(writerId);
             Thread.Sleep(50000);
             return View(values);
         }
         [HttpGet]
         public IActionResult Add()
         {
-            //CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            //List<SelectListItem> selectListItems = (from x in categoryManager.GetAll()
-            //                                        select new SelectListItem
-            //                                        {
-            //                                            Text = x.CategoryName,
-            //                                            Value = x.CategoryId.ToString()
-            //                                        })
-
-            //                                       .ToList();
-            //ViewBag.categoryvalues = selectListItems;
             ViewBag.categoryvalues = Category();
             return View();
         }
         [HttpPost]
         public IActionResult Add(Blog blog)
         {
-            BlogValidator validationRules = new BlogValidator();
+            var writerMail = User.Identity.Name;
+            var writerId = webLogContext.Writers
+                .Where(x => x.WriterMail == writerMail)
+                .Select(y => y.WriterId)
+                .FirstOrDefault();
             ValidationResult results = validationRules.Validate(blog);
             if (results.IsValid)
             {
                 blog.BlogStatus = true;
                 blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                blog.WriterId = 1;
+                blog.WriterId = writerId;
                 blogManager.Add(blog);
                 return RedirectToAction("BlogListByWriter", "Blogs");
             }
@@ -91,12 +92,16 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Controllers
         [HttpPost]
         public IActionResult Update(Blog blog)
         {
-            BlogValidator validationRules = new BlogValidator();
+            var writerMail = User.Identity.Name;
+            var writerId = webLogContext.Writers
+                .Where(x => x.WriterMail == writerMail)
+                .Select(y => y.WriterId)
+                .FirstOrDefault();
             ValidationResult results = validationRules.Validate(blog);
             if (results.IsValid)
             {
                 var value = blogManager.GetById(blog.BlogId);
-                blog.WriterId = 1;
+                blog.WriterId = writerId;
                 blog.BlogId = value.BlogId;
                 blog.BlogCreateDate = value.BlogCreateDate; //DateTime.Parse(DateTime.Now.ToShortDateString());
                 //TODO : Ödev : Güncelleme tarihinin yayınlama tarihi olarak kalması sağlanacak, yeni bir değişken atama yöntemiyle default değer çağırması yapıldı.
