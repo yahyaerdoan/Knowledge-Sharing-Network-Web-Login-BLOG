@@ -1,0 +1,48 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+
+@{
+    ViewData["Title"] = "InBox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Gelen Mesajlar Listesi</h4>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th> # </th>
+                        <th> Konu </th>
+                        <th> Gönderen </th>
+                        <th> Bildirim Tarihi </th>
+                        <th> Durum </th>
+                        <th>  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MessageId</td>
+                            <td>@item.MessageSubject</td>
+                            <td>@item.MessageOfSender.WriterName</td>
+                            <td>@item.MessageDate.ToShortDateString()</td>
+                            <td>
+                                @Html.Raw(item.MessageStatus == true ? "<span class='badge badge-gradient-success'>Aktif</span>" : "<span class='badge badge-gradient-info'>Pasif</span>")
+                            </td>
+
+                            <td><a href="/Messages/MessageDetails/@item.MessageId" class="badge badge-gradient-danger">Mesajı Oku!</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+        <a href="/Blogs/Add/" class="btn btn-primary">Yeni Mesaj Oluştur!</a>
+    </div>
+
+</div>

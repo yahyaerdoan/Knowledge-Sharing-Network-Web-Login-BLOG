@@ -1,0 +1,38 @@
+﻿@using System.IO
+@model EntityLayer.Concrete.Message
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h4 class="tittle">Mesaj Detayları!</h4>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                @using (Html.BeginForm("MessageDetails", "Messages", FormMethod.Get))
+                {
+                    <div class="form-row">
+                        @Html.HiddenFor(x => x.MessageId, new { @class = "form-control" })
+                        <div class="form-group col-md-6">
+                            <h6><label for="validationCustom01">Gönderici</label></h6>
+                            @Html.TextBoxFor(x => x.MessageOfSender.WriterName, new { @class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <h6><label for="validationCustom01">Mesajın Konusu</label></h6>
+                            @Html.TextBoxFor(x => x.MessageSubject, new { @class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h6><label for="exampleInputPassword1">Mesajın İçeriği</label></h6>
+                            @Html.TextAreaFor(x => x.MessageDetails, 15, 3, new { @class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+                }
+                <a href="/Messages/InBox/" class="btn btn-primary col-md-12">Okudum, Mesajlarım Listesine Dön!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
