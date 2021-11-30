@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrators.Controllers
+namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controllers
 {
-    [Area("Administrators")]
+    [Area("Administrator")]
     public class AdministratorsController : Controller
     {
         public IActionResult Index()

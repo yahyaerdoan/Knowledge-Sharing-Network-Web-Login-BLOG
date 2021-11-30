@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@model EntityLayer.Concrete.Category
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Administrator/Views/Shared/AdministratorLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Yeni Kategori Ekle</h5>
+            </div>
+            <div class="ibox-content">
+                @using (Html.BeginForm("Add", "Categories", FormMethod.Post))
+                {
+                   
+                        <div class="form-group  row">
+                            <label class="col-sm-2 col-form-label font-bold">Kategori Adı</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.CategoryName, "", new { @class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label font-bold">Kategori Açıklaması</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(x => x.CategoryDescription,13,3, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.CategoryDescription, "", new { @class = "text-danger"})
+                            </div>
+                        </div>
+                   
+                    <button class="btn btn-outline-primary col-md-12">Yeni Kategoriyi Ekle</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

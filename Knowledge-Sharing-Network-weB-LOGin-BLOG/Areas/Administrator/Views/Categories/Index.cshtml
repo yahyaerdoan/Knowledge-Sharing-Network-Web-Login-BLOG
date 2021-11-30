@@ -4,8 +4,8 @@
 @model IPagedList<Category>
 @{ int i = 0;}
 @{
-ViewData["Title"] = "Index";
-    Layout = "~/Areas/Administrators/Views/Shared/AdministratorLayout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/AdministratorLayout.cshtml";
 }
 
 
@@ -47,10 +47,14 @@ ViewData["Title"] = "Index";
                     {
                         i++;
                         <tr>
-                           
+
                             <th>@i</th>
                             <td>@item.CategoryName</td>
-                            <td><a href="#" class="btn btn-outline-danger">Pasif Yap</a></td>
+                            <td>
+                                <a href="/Administrator/Categories/Delete/@item.CategoryId/"
+                                   id="Delete" onclick="return confirm('Silmek istediğine emin misin?')"
+                                   class="btn btn-outline-danger">Pasif Yap</a>
+                            </td>
                             <td><a href="#" class="btn btn-outline-success">Aktif Yap</a></td>
                             <td><a href="#" class="btn btn-outline-primary">Düzenle</a></td>
                         </tr>
@@ -59,5 +63,6 @@ ViewData["Title"] = "Index";
             </table>
             @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
         </div>
+        <a href="/Administrator/Categories/Add/" class="btn btn-outline-primary col-md-12">Yeni Kategori Ekle</a>
     </div>
 </div>
