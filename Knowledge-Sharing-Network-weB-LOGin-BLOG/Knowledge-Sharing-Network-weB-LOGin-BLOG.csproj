@@ -27,4 +27,9 @@
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administrators\Data\" />
+    <Folder Include="Areas\Administrators\Models\" />
+  </ItemGroup>
+
 </Project>

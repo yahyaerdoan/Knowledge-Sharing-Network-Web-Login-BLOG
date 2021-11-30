@@ -28,7 +28,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
         {
             services.AddControllersWithViews(); //TODO : Service Mvc metodu sayesinde Global yetkilendirme servisi oluþturuldu. 
 
-           //TODO :  services.AddSession(); //TODO : Oturum ekleme Login Controllerde yaptýðýmýz AllowAnonymous yetkinliðini doðru kullanmak için
+            //TODO :  services.AddSession(); //TODO : Oturum ekleme Login Controllerde yaptýðýmýz AllowAnonymous yetkinliðini doðru kullanmak için
 
             services.AddMvc(config =>
             {
@@ -63,7 +63,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-           //TODO app.UseSession(); //TODO : Authorize metodunun çalýþmasý izin verilen sýnýflarýn açýlmasý için bu metodu kullan demeliyiz.
+            //TODO app.UseSession(); //TODO : Authorize metodunun çalýþmasý izin verilen sýnýflarýn açýlmasý için bu metodu kullan demeliyiz.
 
             app.UseAuthentication();
 
@@ -76,6 +76,11 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }
