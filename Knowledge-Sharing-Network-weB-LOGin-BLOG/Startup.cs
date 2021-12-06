@@ -73,14 +73,18 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
 
             app.UseEndpoints(endpoints =>
             {
+                //TODO : Admin katmaný farklý klasör içersinde olduðu için yeniden route belirlemek gerekti bunun için MapAreaControllerRoute yapýsýný kullandým. Yeni route var olanýn altýna yapýþtýrdýðým için hatalar devam etti ve üste yapýþtýrdým denedim çalýþtý.
+                endpoints.MapAreaControllerRoute(
+                    name: "Administrator",
+                    areaName: "Administrator",
+                    pattern: "/Administrator/{controller=Home}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                //TODO : ScaffoldingReadMe sayfasýnda yeni route oluþturmamýz söyleniyor.
             });
         }
     }

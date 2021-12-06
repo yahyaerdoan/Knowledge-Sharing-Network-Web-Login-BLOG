@@ -37,6 +37,7 @@
                     <tr>
                         <th></th>
                         <th>Kategori Adı</th>
+                        <th>Kategori Açıklaması</th>
                         <th>Pasif</th>
                         <th>Aktif</th>
                         <th>Düzenle</th>
@@ -50,6 +51,7 @@
 
                             <th>@i</th>
                             <td>@item.CategoryName</td>
+                            <td>@item.CategoryDescription</td>
                             <td>
                                 <a href="/Administrator/Categories/Delete/@item.CategoryId/"
                                    id="Delete" onclick="return confirm('Silmek istediğine emin misin?')"

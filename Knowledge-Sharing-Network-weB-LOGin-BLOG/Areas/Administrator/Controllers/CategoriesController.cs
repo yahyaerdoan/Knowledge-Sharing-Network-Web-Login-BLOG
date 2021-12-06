@@ -14,7 +14,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
         readonly CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
         readonly CategoryValidator categoryValidator = new CategoryValidator();
 
-        [Route("Administrator/[Controller]/[Action]/{page?}")]
+        //TODO : [Route("Administrator/[Controller]/[Action]/{page?}")] local çözüm.
         public IActionResult Index(int page = 1)
         {
             return View(categoryManager.GetAll().ToPagedList(page, 6));
@@ -25,7 +25,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
             return View();
         }
         [HttpPost]
-        [Route("Administrator/[Controller]/[Action]/")]
+        //TODO : [Route("Administrator/[Controller]/[Action]/")] yolunu bulamayan yeni sayfa için özel yol belirtilmişti bunu startupta çözdüm
         public IActionResult Add(Category category)
         {
             ValidationResult results = categoryValidator.Validate(category);
