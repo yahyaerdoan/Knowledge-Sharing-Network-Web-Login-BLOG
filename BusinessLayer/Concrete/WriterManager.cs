@@ -45,6 +45,16 @@ namespace BusinessLayer.Concrete
             return _writerDal.ListAll(filter);
         }
 
+        public Writer GetByFilter(Expression<Func<Writer, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Writer, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Writer> GetWriterById(int id)
         {
             return _writerDal.ListAll(x=> x.WriterId == id);

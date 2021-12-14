@@ -35,6 +35,16 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Comment GetByFilter(Expression<Func<Comment, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Comment, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Comment GetById(int id)
         {
             throw new System.NotImplementedException();

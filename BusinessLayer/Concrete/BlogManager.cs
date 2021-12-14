@@ -33,7 +33,17 @@ namespace BusinessLayer.Concrete
 
         public List<Blog> ListAll(Expression<Func<Blog, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _blogDal.ListAll(filter);
+        }
+
+        public Blog GetByFilter(Expression<Func<Blog, bool>> filter = null)
+        {
+            return _blogDal.GetByFilter(filter);
+        }
+
+        public int GetByCount(Expression<Func<Blog, bool>> filter = null)
+        {
+            return _blogDal.GetByCount(filter);
         }
 
         public List<Blog> GetLastThreeBlogs()

@@ -49,5 +49,15 @@ namespace BusinessLayer.Concrete
         {
             return _notificationDal.ListAll(filter);
         }
+
+        public Notification GetByFilter(Expression<Func<Notification, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Notification, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

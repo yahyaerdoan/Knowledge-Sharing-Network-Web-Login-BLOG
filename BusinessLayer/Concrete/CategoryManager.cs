@@ -38,6 +38,16 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Category GetByFilter(Expression<Func<Category, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Category, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Category GetById(int id)
         {
             return _categoryDal.GetById(id);

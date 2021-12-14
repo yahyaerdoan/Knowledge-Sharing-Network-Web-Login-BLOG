@@ -44,5 +44,15 @@ namespace BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public Contact GetByFilter(Expression<Func<Contact, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Contact, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

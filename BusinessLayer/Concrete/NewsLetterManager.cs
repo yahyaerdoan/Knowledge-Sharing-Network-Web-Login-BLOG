@@ -39,6 +39,16 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public NewsLetter GetByFilter(Expression<Func<NewsLetter, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<NewsLetter, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public NewsLetter GetById(int id)
         {
             throw new NotImplementedException();

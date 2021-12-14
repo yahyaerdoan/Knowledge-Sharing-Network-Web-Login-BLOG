@@ -35,6 +35,16 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public About GetByFilter(Expression<Func<About, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<About, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public About GetById(int id)
         {
             throw new System.NotImplementedException();

@@ -49,6 +49,16 @@ namespace BusinessLayer.Concrete
            return _messageDal.ListAll(filter);
         }
 
+        public Message GetByFilter(Expression<Func<Message, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetByCount(Expression<Func<Message, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Message> GetInBoxMessageListByWriterId(int id)
         {
             return _messageDal.GetAllWithMessageByWriterId(id);

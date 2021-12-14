@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
@@ -42,6 +45,8 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
                     x.LoginPath = "/Login/Index";
                 }
             );
+
+            services.AddSingleton<IBlogService>(new BlogManager(new EfBlogDal()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

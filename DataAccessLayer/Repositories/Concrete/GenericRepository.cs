@@ -43,6 +43,34 @@ namespace DataAccessLayer.Repositories.Concrete
             return c.Set<T>().Where(filter).ToList();
         }
 
+        public T GetByFilter(Expression<Func<T, bool>> filter = null)
+        {
+            using var c = new WebLogContext();
+            if (filter == null)
+            {
+                return c.Set<T>().FirstOrDefault();
+
+            }
+            else
+            {
+                return c.Set<T>().FirstOrDefault(filter);
+            }
+        }
+
+        public int GetByCount(Expression<Func<T, bool>> filter = null)
+        {
+            using var c = new WebLogContext();
+            if (filter == null)
+            {
+                return c.Set<T>().Count();
+
+            }
+            else
+            {
+                return c.Set<T>().Where(filter).Count();
+            }
+        }
+
         public void Update(T t)
         {
             using var c = new WebLogContext();

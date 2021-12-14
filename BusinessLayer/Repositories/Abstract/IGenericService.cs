@@ -15,5 +15,7 @@ namespace BusinessLayer.Repositories.Abstract
         T GetById(int id);
         List<T> GetAll();
         List<T> ListAll(Expression<Func<T, bool>> filter);
+        T GetByFilter(Expression<Func<T, bool>> filter = null);
+        int GetByCount(Expression<Func<T, bool>> filter = null);
     }
 }
