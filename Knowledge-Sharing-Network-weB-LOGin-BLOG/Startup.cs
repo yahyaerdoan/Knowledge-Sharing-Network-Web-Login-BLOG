@@ -47,6 +47,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG
             );
 
             services.AddSingleton<IBlogService>(new BlogManager(new EfBlogDal()));
+            services.AddSingleton<IAdministratorService>(new AdministratorManager(new EfAdministratorDal()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

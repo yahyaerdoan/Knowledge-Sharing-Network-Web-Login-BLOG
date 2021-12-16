@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(WebLogContext))]
-    partial class WebLogContextModelSnapshot : ModelSnapshot
+    [Migration("20211216113346_add_administrator_table")]
+    partial class add_administrator_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,30 +53,30 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Administrator", b =>
                 {
-                    b.Property<int>("AdministratorId")
+                    b.Property<int>("AdministartorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AdministratorFirstLastName")
+                    b.Property<string>("AdministartorImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdministratorImageUrl")
+                    b.Property<string>("AdministartorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdministratorPassword")
+                    b.Property<string>("AdministartorPassword")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdministratorRole")
+                    b.Property<string>("AdministartorRole")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdministratorShortDescription")
+                    b.Property<string>("AdministartorShortDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdministratorUserName")
+                    b.Property<string>("AdministartorUserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AdministratorId");
+                    b.HasKey("AdministartorId");
 
                     b.ToTable("Administrators");
                 });
