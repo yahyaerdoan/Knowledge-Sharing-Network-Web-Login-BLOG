@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.ViewComponents.Statistic
 {
-    public class PartialStatisticTextual : ViewComponent
+    public class PartialStatisticTextualSecond : ViewComponent
     {
         private readonly IBlogService _blogService;
 
         private readonly WebLogContext webLogContext = new WebLogContext();
 
-        public PartialStatisticTextual(IBlogService blogService)
+        public PartialStatisticTextualSecond(IBlogService blogService)
         {
             _blogService = blogService;
         }

@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.ViewComponents.Statistic
 {
-    public class PartialStatisticScalar : ViewComponent
+    public class PartialStatisticScalarFirst : ViewComponent
     {
         private readonly IBlogService _blogService;
 
         //private readonly BlogManager blogManager = new BlogManager(new EfBlogDal());
         private readonly WebLogContext webLogContext = new WebLogContext();
 
-        public PartialStatisticScalar(IBlogService blogService)
+        public PartialStatisticScalarFirst(IBlogService blogService)
         {
             _blogService = blogService;
         }
