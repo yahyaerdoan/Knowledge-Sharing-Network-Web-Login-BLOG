@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete.Context;
@@ -27,6 +28,18 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.ViewCompo
             ViewBag.blogTotalCount = _blogService.GetByCount();
             ViewBag.newMessageCount = webLogContext.Contacts.Count();
             ViewBag.commetTotalCount = webLogContext.Comments.Count();
+
+            #region Havadurumu Api
+
+            string weatherApi = "14ad2aba611dbef9c504b82a127794c5";
+            string connection =
+                "http://api.openweathermap.org/data/2.5/weather?q=Uşak&mode=xml&lang=tr&units=metric&appid=" +
+                weatherApi;
+            XDocument document = XDocument.Load(connection);
+            ViewBag.todayWeather = document.Descendants("temperature").ElementAt(0).Attribute("value").Value;
+            ViewBag.cityWeather = document.Descendants("city").ElementAt(0).Attribute("name").Value;
+
+            #endregion
             return View();
         }
     }
