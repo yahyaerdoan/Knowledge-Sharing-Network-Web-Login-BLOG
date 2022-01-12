@@ -6,15 +6,22 @@
 
 <div class="col-lg-12">
     <h1 class="text-md-center">Yazar Ajax İşlemleri</h1>
-    <h5><button type="button" id="btngetlist" class="btn btn-outline-primary col-lg-12">Yazarlar Listesi</button></h5>
+    <h3><button type="button" id="btngetwriterlist" class="btn btn-outline-primary col-lg-12">Yazarlar Listesi</button></h3>
+    <h3><button type="button" id="btngetwriterbyıd" class="btn btn-outline-success col-lg-12">Yazarı Id ile Getir</button></h3>
 </div>
 <div id="writerlist">
 
 </div>
+<div id="getwriterbyid">
+
+</div>
+<div class="col-lg-12">
+    <input class="form-control" type="text" id="id" placeholder="görüntülemek için yazar id numarasını giriniz"/>
+</div>
 @section scripts{
     <script>
 
-        $("#btngetlist").click(function () {
+        $("#btngetwriterlist").click(function () {
             $.ajax({
                 contentType: "application/json",
                 dataType: "json",
@@ -62,6 +69,10 @@
                 }
             })
         })
-    </script>
 
+        $("#btngetwriterbyıd").click(x => {
+            let id = $("#id").val();
+            console.log(id);
+        });
+    </script>
 }
