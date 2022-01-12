@@ -16,6 +16,13 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Add(WriterModel writerModel)
+        {
+            writerModels.Add(writerModel);
+            var jsonWriters = JsonConvert.SerializeObject(writerModel);
+            return Json(jsonWriters);
+        }
         public IActionResult GetWriterById(int id)
         {
             var getWriter = writerModels.FirstOrDefault(x => x.Id == id);
