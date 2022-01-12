@@ -22,7 +22,8 @@
                 type: "Get",
                 url: "/Administrator/Writers/WriterList/",
                 success: function (writers) {
-                    console.log(writers);
+                    let writer = jQuery.parseJSON(writers);
+                    console.log(writer);
                 }
             })
         })
