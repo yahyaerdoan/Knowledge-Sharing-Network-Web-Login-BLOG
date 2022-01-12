@@ -7,7 +7,7 @@
 <div class="col-lg-12">
     <h1 class="text-md-center">Yazar Ajax İşlemleri</h1>
     <h3><button type="button" id="btngetwriterlist" class="btn btn-outline-primary col-lg-12">Yazarlar Listesi</button></h3>
-    <h3><button type="button" id="btngetwriterbyıd" class="btn btn-outline-success col-lg-12">Yazarı Id ile Getir</button></h3>
+    <h3><button type="button" id="btngetwriterbyid" class="btn btn-outline-success col-lg-12">Yazarı Id ile Getir</button></h3>
 </div>
 <div id="writerlist">
 
@@ -16,7 +16,7 @@
 
 </div>
 <div class="col-lg-12">
-    <input class="form-control" type="text" id="id" placeholder="görüntülemek için yazar id numarasını giriniz"/>
+    <input class="form-control" type="text" id="id" placeholder="görüntülemek için yazar id numarasını giriniz" />
 </div>
 @section scripts{
     <script>
@@ -31,48 +31,59 @@
                     let writer = jQuery.parseJSON(writers);
                     console.log(writer);
                     let writertable = `
-                                            <div class="col-lg-12">
-                                            <div class="ibox ">
-                                            <div class="ibox-title">
-                                            <h5>Yazarlar Listesi </h5>
-                                            <div class="ibox-tools">
-                                            <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                            </a>
-                                            </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                            <table class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                            <th>Yazar Id</th>
-                                            <th>Yazar Adı</th>
-                                            </tr>
-                                            </thead>`;
+                                                    <div class="col-lg-12">
+                                                    <div class="ibox ">
+                                                    <div class="ibox-title">
+                                                    <h5>Yazarlar Listesi </h5>
+                                                    <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                    <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                    </div>
+                                                    </div>
+                                                    <div class="ibox-content">
+                                                    <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                    <th>Yazar Id</th>
+                                                    <th>Yazar Adı</th>
+                                                    </tr>
+                                                    </thead>`;
                     $.each(writer,
                         (index, value) => {
                             writertable += `
 
-                                            <tbody>
-                                            <tr>
-                                            <td>${value.Id}</td>
-                                            <td>${value.Name}</td>
-                                            </tr>
-                                            </tbody>`
+                                                    <tbody>
+                                                    <tr>
+                                                    <td>${value.Id}</td>
+                                                    <td>${value.Name}</td>
+                                                    </tr>
+                                                    </tbody>`
                         });
                     writertable += `
-                                            </table>
-                                            </div>
-                                            </div>
-                                            </div>`;
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                    </div>`;
                     $("#writerlist").html(writertable);
                 }
             })
         })
 
-        $("#btngetwriterbyıd").click(x => {
+        $("#btngetwriterbyid").click(x => {
             let id = $("#id").val();
-            console.log(id);
-        });
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                data: { id: id },
+                url: "/Administrator/Writers/GetWriterById/",
+                success: function (writers) {
+                    let writer = jQuery.parseJSON(writers);
+                    console.log(writer);
+                    console.log(id);
+                }
+            });
+        })
     </script>
 }
