@@ -22,7 +22,7 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
             var jsonWriters = JsonConvert.SerializeObject(getWriter);
             return Json(jsonWriters);
         }
-        public IActionResult WriterList()
+        public IActionResult GetWriterList()
         {
             var jsonWriters = JsonConvert.SerializeObject(writerModels);
             return Json(jsonWriters);
