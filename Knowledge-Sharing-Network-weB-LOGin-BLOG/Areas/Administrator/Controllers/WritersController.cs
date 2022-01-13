@@ -11,7 +11,6 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
     [Area("Administrator")]
     public class WritersController : Controller
     {
-        
         public IActionResult Index()
         {
             return View();
@@ -22,6 +21,13 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
             writerModels.Add(writerModel);
             var jsonWriters = JsonConvert.SerializeObject(writerModel);
             return Json(jsonWriters);
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var deletewriter = writerModels.FirstOrDefault(x => x.Id == id);
+            writerModels.Remove(deletewriter);
+            return Json(deletewriter);
         }
         public IActionResult GetWriterById(int id)
         {
