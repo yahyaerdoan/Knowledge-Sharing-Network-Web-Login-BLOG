@@ -29,6 +29,14 @@ namespace Knowledge_Sharing_Network_weB_LOGin_BLOG.Areas.Administrator.Controlle
             writerModels.Remove(deletewriter);
             return Json(deletewriter);
         }
+        [HttpPut]
+        public IActionResult Update(WriterModel writerModel)
+        {
+            var updatewriter = writerModels.FirstOrDefault(x => x.Id == writerModel.Id);
+            updatewriter.Name = writerModel.Name;
+            var jsonWriters = JsonConvert.SerializeObject(writerModel);
+            return Json(jsonWriters);
+        }
         public IActionResult GetWriterById(int id)
         {
             var getWriter = writerModels.FirstOrDefault(x => x.Id == id);
